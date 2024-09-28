@@ -40,16 +40,16 @@ first_scan = f"https://crt.sh/?q={url}&output=json"
 
 
 try:
-    # إرسال الطلب إلى first_scan
+    
     send_to = rq.get(first_scan, headers=hed)
     
     if send_to.status_code == 200:
         jss = send_to.json()
         for i in jss:
-            # استرجاع وتجزئة الساب دومينات
+            
             subdomains = i.get('name_value', 'N/A').split('\n')
             for subdomain in subdomains:
-                # تحقق باستخدام تعبير منتظم لاستخراج الساب دومين فقط
+                
                 if re.match(r"^[*.\w-]+\.\w+$", subdomain):
                     print(f"Subdomain: --> {Fore.BLUE+subdomain}")
                     
